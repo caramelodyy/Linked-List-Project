@@ -1,1 +1,31 @@
+let stage;
+function setup() 
+{
+  createCanvas(800, 600);
+}
 
+function draw() 
+{
+  background(0);
+  textSize(60);
+  fill(255);
+  text("Find a PenPal", 125,250)
+  fill(0);
+  strokeWeight(5);
+  stroke(255);
+  rect(125,325,400,150)
+  textSize(40);
+  strokeWeight(1);
+  fill(255);
+  text("Click to LOGIN",190,410)
+  if(stage==0)
+  {
+    if(mousePressed)
+      stage=1;
+  }
+
+  if(stage==1)
+  {
+    background(255);
+  }
+}
