@@ -1,31 +1,44 @@
-let stage;
-function setup() 
-{
+let stage = 0;
+
+function setup() {
   createCanvas(800, 600);
 }
 
-function draw() 
-{
-  background(0);
-  textSize(60);
-  fill(255);
-  text("Find a PenPal", 125,250)
-  fill(0);
-  strokeWeight(5);
-  stroke(255);
-  rect(125,325,400,150)
-  textSize(40);
-  strokeWeight(1);
-  fill(255);
-  text("Click to LOGIN",190,410)
-  if(stage==0)
-  {
-    if(mousePressed)
-      stage=1;
+function draw() {
+
+  if (stage == 0) {
+    background(0);
+
+    textSize(60);
+    fill(255);
+    text("Find a PenPal", 125, 250);
+
+    fill(0);
+    strokeWeight(5);
+    stroke(255);
+    rect(125, 325, 400, 150);
+
+    textSize(40);
+    strokeWeight(1);
+    fill(255);
+    text("Click to LOGIN", 190, 410);
   }
 
-  if(stage==1)
-  {
+  else if (stage == 1) {
     background(255);
+
+  }
+}
+
+function mousePressed() {
+
+  if (stage == 0) 
+  {
+
+    if (mouseX >= 125 && mouseX <= 525 &&
+        mouseY >= 325 && mouseY <= 475) 
+    {
+      stage = 1;
+    }
   }
 }
