@@ -45,30 +45,7 @@ function draw() {
     stroke(0);
     strokeWeight(2);
     fill(255);
-    rect(180, 215, 400, 50);
 
-
-    rect(180, 315, 400, 50);
-
-
-    fill(0);
-    noStroke();
-    textSize(25);
-
-    if (usernameInput) {
-      text(usernameInput, 195, 248);
-    }
-
-    if (passwordInput) {
-
-      let hiddenPassword = "";
-
-      for (let i = 0; i < passwordInput.length; i++) {
-        hiddenPassword += "*";
-      }
-
-      text(hiddenPassword, 195, 348);
-    }
 
     fill(0);
     stroke(0);
@@ -89,10 +66,8 @@ function draw() {
 
     fill(255);
     textSize(50);
-    text("Welcome!", 300, 300);
+    text("Stage 2", 300, 300);
 
-    textSize(25);
-    text("You are now on Stage 2.", 280, 350);
   }
 }
 
@@ -107,29 +82,20 @@ function mousePressed() {
       stage = 1;
 
 
-      usernameInput = "";
-      passwordInput = "";
+      usernameInput = createInput();
+      usernameInput.position(180, 215);
+      usernameInput.size(390, 40);
+
+      passwordInput = createInput();
+      passwordInput.position(180, 315);
+      passwordInput.size(390, 40);
+
+      passwordInput.attribute("type", "password");
     }
   }
 
 
-
   else if (stage == 1) {
-
-
-    if (mouseX >= 180 && mouseX <= 580 &&
-        mouseY >= 215 && mouseY <= 265) {
-
-      usernameInput = prompt("Enter your username:");
-    }
-
-
-    if (mouseX >= 180 && mouseX <= 580 &&
-        mouseY >= 315 && mouseY <= 365) {
-
-      passwordInput = prompt("Enter your password:");
-    }
-
 
     if (mouseX >= 300 && mouseX <= 500 &&
         mouseY >= 420 && mouseY <= 490) {
@@ -145,14 +111,22 @@ function checkLogin() {
   let correctUsername = "User";
   let correctPassword = "1234";
 
-  if (usernameInput == correctUsername &&
-      passwordInput == correctPassword) {
+  let username = usernameInput.value();
+  let password = passwordInput.value();
 
+  if (username == correctUsername &&
+      password == correctPassword) {
+
+    fill(0,255,0);
     loginMessage = "Correct!";
 
     setTimeout(function() {
       stage = 2;
       loginMessage = "";
+
+      usernameInput.remove();
+      passwordInput.remove();
+
     }, 2000);
 
   } else {
