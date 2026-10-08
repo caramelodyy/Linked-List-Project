@@ -1,1 +1,163 @@
+let stage = 0;
+
+let usernameInput;
+let passwordInput;
+
+let loginMessage = "";
+let messageTime = 0;
+
+function setup() {
+  createCanvas(800, 600);
+}
+
+function draw() {
+
+  if (stage == 0) {
+    background(0);
+
+    textSize(60);
+    fill(255);
+    text("Find a PenPal", 125, 250);
+
+    fill(0);
+    strokeWeight(5);
+    stroke(255);
+    rect(125, 325, 400, 150);
+
+    textSize(40);
+    strokeWeight(1);
+    fill(255);
+    text("Click to LOGIN", 190, 410);
+  }
+
+
+  else if (stage == 1) {
+    background(255);
+
+    fill(0);
+    textSize(50);
+    text("Login", 330, 100);
+
+    textSize(25);
+    text("Username:", 180, 200);
+    text("Password:", 180, 300);
+
+    stroke(0);
+    strokeWeight(2);
+    fill(255);
+    rect(180, 215, 400, 50);
+
+
+    rect(180, 315, 400, 50);
+
+
+    fill(0);
+    noStroke();
+    textSize(25);
+
+    if (usernameInput) {
+      text(usernameInput, 195, 248);
+    }
+
+    if (passwordInput) {
+
+      let hiddenPassword = "";
+
+      for (let i = 0; i < passwordInput.length; i++) {
+        hiddenPassword += "*";
+      }
+
+      text(hiddenPassword, 195, 348);
+    }
+
+    fill(0);
+    stroke(0);
+    rect(300, 420, 200, 70);
+
+    fill(255);
+    textSize(30);
+    text("ENTER", 355, 465);
+
+    fill(0);
+    textSize(25);
+    text(loginMessage, 250, 550);
+  }
+
+
+  else if (stage == 2) {
+    background(0);
+
+    fill(255);
+    textSize(50);
+    text("Welcome!", 300, 300);
+
+    textSize(25);
+    text("You are now on Stage 2.", 280, 350);
+  }
+}
+
+
+function mousePressed() {
+
+  if (stage == 0) {
+
+    if (mouseX >= 125 && mouseX <= 525 &&
+        mouseY >= 325 && mouseY <= 475) {
+
+      stage = 1;
+
+
+      usernameInput = "";
+      passwordInput = "";
+    }
+  }
+
+
+
+  else if (stage == 1) {
+
+
+    if (mouseX >= 180 && mouseX <= 580 &&
+        mouseY >= 215 && mouseY <= 265) {
+
+      usernameInput = prompt("Enter your username:");
+    }
+
+
+    if (mouseX >= 180 && mouseX <= 580 &&
+        mouseY >= 315 && mouseY <= 365) {
+
+      passwordInput = prompt("Enter your password:");
+    }
+
+
+    if (mouseX >= 300 && mouseX <= 500 &&
+        mouseY >= 420 && mouseY <= 490) {
+
+      checkLogin();
+    }
+  }
+}
+
+
+function checkLogin() {
+
+  let correctUsername = "User";
+  let correctPassword = "1234";
+
+  if (usernameInput == correctUsername &&
+      passwordInput == correctPassword) {
+
+    loginMessage = "Correct!";
+
+    setTimeout(function() {
+      stage = 2;
+      loginMessage = "";
+    }, 2000);
+
+  } else {
+
+    loginMessage = "Username or password incorrect";
+  }
+}
 
