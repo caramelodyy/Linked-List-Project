@@ -8,9 +8,11 @@
 
 
 // LinkedList class
- constructor(passWord, name, age, hobby, areaOfResidence){
-     this.first = null;
-     this.current = first;
+class LinkedList{
+  constructor(iD,passWord, name, age, hobby, areaOfResidence){
+     let first = null;
+     let current = first;
+     this.iD = iD;
      this.passWord = passWord;
      this.name = name;
      this.age = age;
@@ -18,8 +20,8 @@
      this.areaOfResidence = areaOfResidence;
   }
 
-  add(iD,name,age,hobby,placeOfResidence){
-    let user = new Profile(iD,name,age,hobby,placeOfResidence);
+  add(iD,passWord,name,age,hobby,placeOfResidence){
+    let user = new Profile(iD,passWord,name,age,hobby,placeOfResidence);
     if(this.first == null){
       this.first = user;
     } else {
@@ -28,7 +30,7 @@
       current.next = user;
     }
   }
-  show(iD,name,age,hobby,placeOfResidence){
+  show(iD,passWord,name,age,hobby,placeOfResidence){
     let current = this.first
     while( current !== null){
       current.display();//<- put something here for the position as well
@@ -39,26 +41,29 @@
 
 // Profile class
 class Profile{
-  constructor(iD, name, age, hobby, placeOfResidence){
+  constructor(iD, passWord, name, age, hobby, placeOfResidence){
      this.next = null;
      this.iD = iD;
+     this.passWord = passWord;
      this.name = name;
      this.age = age;
      this.hobby = hobby;
      this.placeOfResidence = placeOfResidence;
   }
-  display(iD, name, age, hobby, placeOfResidence){
+  display(iD,passWord,name,age,hobby,placeOfResidence){
     
   }
 }
 
 // test sketch to see if the profile class works
 
-async function setup() {
-  createCanvas(400, 400);
-  let person = new Profile(1,"name: John Doe","age: 24","hobby: video games", "Residence: Ontario Canada");
+function setup() {
+createCanvas(400, 400);
+  
+  let person = new Profile(1,"password: C001Pa55w0rd","name: John Doe","age: 24","hobby: video games", "Residence: Ontario Canada");
 
   print(person.name);
+  print(person.passWord);
   print(person.age);
   print(person.hobby);
   print(person.placeOfResidence);
@@ -67,6 +72,7 @@ async function setup() {
 function draw() {
   background(220);
 }
+
 
 // idex.html file
 
