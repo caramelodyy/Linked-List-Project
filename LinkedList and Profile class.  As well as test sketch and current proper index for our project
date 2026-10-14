@@ -1,0 +1,94 @@
+// We don't need to have these on seperate files but I chose to create them that way.
+// If wanted just copy and paste these into one file.
+// But if you want them to be in seprate files for organization
+// make sure to scroll to the bottom and copy paste into the p5 index.html file.
+// You can find the index and create new files on the side by clicking an arrow above where you type code 
+// then clicking the plus icon to create a new file.
+
+
+
+// LinkedList class
+ constructor(passWord, name, age, hobby, areaOfResidence){
+     this.first = null;
+     this.current = first;
+     this.passWord = passWord;
+     this.name = name;
+     this.age = age;
+     this.hobby = hobby;
+     this.areaOfResidence = areaOfResidence;
+  }
+
+  add(iD,name,age,hobby,placeOfResidence){
+    let user = new Profile(iD,name,age,hobby,placeOfResidence);
+    if(this.first == null){
+      this.first = user;
+    } else {
+      let current = first;
+      while(current !== null) current = current.next;
+      current.next = user;
+    }
+  }
+  show(iD,name,age,hobby,placeOfResidence){
+    let current = this.first
+    while( current !== null){
+      current.display();//<- put something here for the position as well
+      current = current.next;
+    }
+  }
+}
+
+// Profile class
+class Profile{
+  constructor(iD, name, age, hobby, placeOfResidence){
+     this.next = null;
+     this.iD = iD;
+     this.name = name;
+     this.age = age;
+     this.hobby = hobby;
+     this.placeOfResidence = placeOfResidence;
+  }
+  display(iD, name, age, hobby, placeOfResidence){
+    
+  }
+}
+
+// test sketch to see if the profile class works
+
+async function setup() {
+  createCanvas(400, 400);
+  let person = new Profile(1,"name: John Doe","age: 24","hobby: video games", "Residence: Ontario Canada");
+
+  print(person.name);
+  print(person.age);
+  print(person.hobby);
+  print(person.placeOfResidence);
+}
+
+function draw() {
+  background(220);
+}
+
+// idex.html file
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.4/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5.sound@0.4.1/dist/p5.sound.min.js"></script>
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+     <script src="Profile.js"></script>
+    <script src="LinkedList.js"></script>
+    <script src="Sketch.js"></script>
+  </body>
+</html>
+
+
