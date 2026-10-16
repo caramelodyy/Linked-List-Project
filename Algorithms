@@ -1,0 +1,9 @@
+class Algorithms
+{
+  constructor(age, hobby, areaOfResidence)
+  {
+    this.age = age;
+    this.hobby = hobby;
+    this.areaOfResidence = areaOfResidence;
+  }
+}
