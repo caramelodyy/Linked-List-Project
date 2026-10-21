@@ -1,0 +1,56 @@
+class Questionnaires
+  {
+    constructor() {
+    this.name = "";
+    this.age = 0;
+    this.hobby = "";
+    this.placeOfResidence = "";
+
+    this.minAge = 0;
+    this.maxAge = 0;
+    this.preferredLocation = "";
+  }
+
+  displayQuestions() {
+     this.name = prompt("What is your name?");
+    this.age = Number(prompt("How old are you?"));
+    this.hobby = prompt("What are your hobbies?");
+    this.placeOfResidence = prompt("Where do you live?");
+
+    this.minAge = Number(
+      prompt("What is your desired PenPal's minimum age?")
+    );
+
+    this.maxAge = Number(
+      prompt("What is your desired PenPal's maximum age?")
+    );
+
+    this.preferredLocation = prompt("Where would you like your PenPal to live?"
+     
+    );
+  }
+
+  recordAnswer(question, answer) {
+    // Store an answer
+    if (
+      this.name == "" ||
+      this.age <= 0 ||
+      this.hobby == "" ||
+      this.placeOfResidence == "" ||
+      this.minAge <= 0 ||
+      this.maxAge < this.minAge
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  validateAnswers() {
+    // Check required answers
+  }
+
+  submitQuestionnaire() {
+    // Submit answers and update profiles
+  }
+}
