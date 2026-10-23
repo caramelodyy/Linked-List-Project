@@ -1,1 +1,33 @@
-
+class Profile {
+  constructor(
+    iD,
+    passWord,
+    name,
+    age,
+    hobby1,
+    hobby2,
+    hobby3,
+    placeOfResidence,
+    likes
+  ) {
+    this.next = null;
+    this.iD = iD;
+    this.passWord = passWord;
+    this.name = name;
+    this.age = age;
+    this.hobby1 = hobby1;
+    this.hobby2 = hobby2;
+    this.hobby3 = hobby3;
+    this.placeOfResidence = placeOfResidence;
+    this.likes = likes
+    this.matches = new LinkedList();
+    this.compatibility = 0;
+  }
+  display(name, age, hobby1, hobby2, hobby3, placeOfResidence, likes, prefrences) {
+    text("Name: " +this.name,400,300);
+    text("Age: "+this.age,400,500);
+    //text("Hobbies: "this.hobby1+", "+ this.hobby2 +", " + this.hobby3);
+    text("Location: "+this.placeOfResidence);
+    
+  }
+}
