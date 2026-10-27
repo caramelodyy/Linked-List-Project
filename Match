@@ -1,0 +1,10 @@
+//Represents a suggested match between two users
+class Match{
+  constructor(id,user1,user2,compatibilityScore)
+  {
+    this.id = id;
+    this.user1 = user1;
+    this.user2 = user2;
+    this.compatibilityScore = compatibilityScore;
+  }
+}
