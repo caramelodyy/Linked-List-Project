@@ -1,0 +1,9 @@
+//A User owns a Profile and keeps track of matches
+class User{
+  constructor(id,username,proifle){
+    this.id = id;
+    this.username = username;
+    this.profile = profile;
+    this.matches = matches;
+  }
+}
