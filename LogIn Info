@@ -6,12 +6,22 @@ let passwordInput;
 let loginMessage = "";
 
 function setup() {
-  createCanvas(800, 600);
+ createCanvas(800, 600);
+
+  dataBase = new LinkedList(2,"password: idk", "name: Jane Doe","age: 25","hobby: gardening",)
+
+  dataBase.add()
+  //let person = new Profile(1,"password: C001Pa55w0rd","name: John Doe","age: 24","hobby: video games", "Residence: Ontario Canada");
+
+  //print(person.name);
+  //print(person.passWord);
+  //print(person.age);
+  //print(person.hobby);
+  //print(person.placeOfResidence);
 }
 
 function draw() {
-
-  // title screen
+// title screen
   if (stage == 0) {
     background(0);
 
@@ -126,4 +136,5 @@ function checkLogin() {
 
     loginMessage = "Username or password incorrect";
   }
+  
 }
