@@ -20,7 +20,7 @@ constructor()
     if(user === null)
       return false;
     const removed = this.allUsers.removedById(id);
-    return removed;
+    return.removed;
   } //remove a profile from the LinkedList
 
 
