@@ -1,0 +1,134 @@
+let stage = 0;
+
+let usernameInput;
+let passwordInput;
+
+let loginMessage = "";
+
+allProfiles = new LinkedList;
+function setup() {
+ createCanvas(800, 600);
+ 
+}
+
+function draw() {
+// title screen
+  if (stage == 0) {
+    background(0);
+
+    textSize(60);
+    fill(255);
+    text("Find a PenPal", 125, 250);
+
+    fill(0);
+    strokeWeight(5);
+    stroke(255);
+    rect(125, 325, 400, 150);
+
+    textSize(40);
+    strokeWeight(1);
+    fill(255);
+    text("Click to LOGIN", 190, 410);
+  }
+
+  // log-in screen
+  else if (stage == 1) {
+    background(255);
+
+    fill(0);
+    textSize(50);
+    text("Login", 330, 100);
+
+    textSize(25);
+    text("Username:", 180, 200);
+    text("Password:", 180, 300);
+    
+    stroke(0);
+    strokeWeight(2);
+    fill(0);
+    rect(300, 420, 200, 70);
+
+    fill(255);
+    textSize(30);
+    text("ENTER", 355, 465);
+    fill(0);
+    textSize(25);
+    text(loginMessage, 250, 550);
+  }
+
+  // success login screen (temporarily)
+  else if (stage == 2) {
+    background(0);
+    fill(100);
+    rect( 0, 0, 400, 600);
+    fill(255);
+    textSize(50);
+    text("Stage 2", 300, 300);
+    
+    
+  }
+}
+
+function mousePressed() {
+
+  if (stage == 0) {
+
+    if (
+      mouseX >= 125 && mouseX <= 525 &&
+      mouseY >= 325 && mouseY <= 475
+    ) {
+      stage = 1;
+
+      usernameInput = createInput();
+      usernameInput.position(180, 215);
+      usernameInput.size(390, 40);
+
+      passwordInput = createInput();
+      passwordInput.position(180, 315);
+      passwordInput.size(390, 40);
+      passwordInput.attribute("type", "text");
+    }
+  }
+
+  // check login function
+  else if (stage == 1) {
+
+    if (
+      mouseX >= 300 && mouseX <= 500 &&
+      mouseY >= 420 && mouseY <= 490
+    ) {
+      checkLogin();
+    }
+  }
+}
+
+function checkLogin() {
+
+  let correctUsername = "User";
+  let correctPassword = "1234";
+
+  let username = usernameInput.value();
+  let password = passwordInput.value();
+
+  if (
+    username == correctUsername &&
+    password == correctPassword
+  ) {
+
+    loginMessage = "Correct!";
+
+    setTimeout(function() {
+      stage = 2;
+      loginMessage = "";
+
+      usernameInput.remove();
+      passwordInput.remove();
+
+    }, 2000);
+
+  } else {
+
+    loginMessage = "Username or password incorrect";
+  }
+  
+}

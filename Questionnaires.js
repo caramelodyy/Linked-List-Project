@@ -1,0 +1,69 @@
+class Questionnaires
+  {
+    constructor() {
+    this.name = "";
+    this.age = 0;
+    this.hobby = "";
+    this.placeOfResidence = "";
+
+    this.minAge = 0;
+    this.maxAge = 100;
+    this.preferredLocation = "";
+  }
+
+  displayQuestions() {
+     this.name = text("What is your name?", 400,300);
+    this.age = text("How old are you?", 400,300);
+    this.hobby = text("What are your hobbies?",400,300);
+    this.placeOfResidence = text("Where do you live?",400,300);
+
+    this.minAge = text("What is your desired PenPal's minimum age?",400,300);
+
+    this.maxAge = text("What is your desired PenPal's maximum age?",400,300);
+
+    this.preferredLocation = text("Where would you like your PenPal to live?",400,300);
+  }
+
+  recordAnswer(question, answer) {
+    // Store an answer
+    if (
+      this.name == "" ||
+      this.age <= 0 ||
+      this.hobby == "" ||
+      this.placeOfResidence == "" ||
+      this.minAge <= 0 ||
+      this.maxAge < this.minAge
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  validateAnswers() {
+    // Check required answers
+    if(this.name == ""||this.age<=0||this.hobby==""||this.placeOfResidence==""||this.minAge<=0||this.maxAge<this.minAge)
+    {
+      return false;
+    }
+    return true;
+  }
+
+  submitQuestionnaire() {
+    // Submit answers and update profiles
+    if(this.validateAnswers())
+    {
+      profile.name = this.name;
+      profile.age = this.age;
+      profile.hobby = this.hobby;
+      profile.placeOfResidence = this.placeOfResidence;
+
+      profile.preferences = {
+        minAge: this.minAge, maxAge: this.maxAge, preferredLocation: this.preferredLocation};
+      print("Profile Updated");
+      }
+    else {
+      print("Please fill all information")
+    }
+  }
+}

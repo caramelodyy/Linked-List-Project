@@ -1,0 +1,52 @@
+class Profile {
+  constructor(
+    iD,
+    passWord,
+    name,
+    age,
+    hobby1,
+    hobby2,
+    hobby3,
+    placeOfResidence,
+    likes
+  ) {
+    this.next = null;
+    this.iD = iD;
+    this.passWord = String(passWord);
+    this.name = String(name);
+    this.age = String(age);
+    this.hobby1 = String(hobby1);
+    this.hobby2 = String(hobby2);
+    this.hobby3 = String(hobby3);
+    this.placeOfResidence = String(placeOfResidence);
+    this.likes = String(likes);
+    this.matches = new LinkedList();
+    this.Compatibility = 0;
+  }
+  display(
+    y 
+  ) {
+    textSize(20);
+    text(
+      this.iD +
+        "," +
+        this.passWord +
+        "," +
+        this.name +
+        "," +
+        this.age +
+        "," +
+        this.hobby1 +
+        "," +
+        this.hobby2 +
+        "," +
+        this.hobby3 +
+        "," +
+        this.placeOfResidence +
+        "," +
+        this.likes,
+      10, 
+      y
+    );
+  }
+}

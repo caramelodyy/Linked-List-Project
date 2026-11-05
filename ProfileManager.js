@@ -1,0 +1,43 @@
+class ProfileManager
+{
+constructor()
+  {
+   this.allProfiles = new LinkedList()
+    this.nextId = 1;
+
+  }
+
+  addNewProfile(profile) {
+    const user = new User(this.nextId, profile.username,profile);
+    this.nextId++;
+    this.allUsers.add(user);
+    return user;
+  } //add a new profile and give it an ID number
+
+  
+  deleteProfile(id) {
+    const user = this.allUsers.findById(id);
+    if(user === null)
+      return false;
+    const removed = this.allUsers.removedById(id);
+    this.return.removed;
+  } //remove a profile from the LinkedList
+
+
+  callProfile(id) {
+    return this.alUsers.findById(id);
+   
+  } //select a profile by using ID number
+
+  
+   editProfile() {
+    this.questionnaires = new Questionnaires();
+  }
+
+
+  Validate(profile) {
+    
+  }//checks to see if profile has information properly filled.
+}
+
+  
