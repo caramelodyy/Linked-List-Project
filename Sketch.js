@@ -4,6 +4,7 @@ let usernameInput;
 let passwordInput;
 
 let loginMessage = "";
+let q = new Questionnaires();
 
 allProfiles = new LinkedList;
 function setup() {
@@ -56,16 +57,11 @@ function draw() {
     text(loginMessage, 250, 550);
   }
 
+
   // success login screen (temporarily)
   else if (stage == 2) {
     background(0);
-    fill(100);
-    rect( 0, 0, 400, 600);
-    fill(255);
-    textSize(50);
-    text("Stage 2", 300, 300);
-    
-    
+    q.displayQuestions();
   }
 }
 
