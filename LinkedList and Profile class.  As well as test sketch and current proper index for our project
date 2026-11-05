@@ -1,0 +1,52 @@
+class Node{
+  constructor(data){
+    this.data = data;
+    this.first = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.first = null;
+  }
+
+  add(data)
+  {
+    let newNode = new Node(data);
+
+    if(this.first === null)
+    {
+      this.first = newNode;
+    } else{
+      let current = this.first;
+      while(current.next !==null){
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+    
+  }
+
+  add(Profile) {
+    let userProfile = Profile;
+    if (this.first === null) {
+      this.first = userProfile;
+    } else {
+      let current = this.first;
+      while (current.next !== null) {
+        current = current.next;
+      }
+      current.next = userProfile;
+    }
+  }
+
+  display()
+  {
+    let current = current.first;
+    while(current.next!== null)
+    {
+      console.log(current.data)
+      current = current.next;
+    }
+  }
+}
