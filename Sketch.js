@@ -3,14 +3,16 @@ let stage = 0;
 let usernameInput;
 let passwordInput;
 
-let allProfiles;
-
 let loginMessage = "";
 
-allProfiles = new LinkedList;
-function setup() {
+let profileManager;
+
+
+async function setup() {
  createCanvas(800, 600);
- 
+ profileManager = new ProfileManager();
+  await profileManager.loadProfiles();
+
 }
 
 function draw() {

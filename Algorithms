@@ -12,14 +12,27 @@ class Algorithms {
 
   displayMatchResults() {} //Displays the LinkedList that displays profiles that match.
 
-  traversingTheListAndDisplay() {
-    while(this.first !== null) {
-      process.stdout.write(head..toString());
-      if(head.next !== null) {
-        process.stdout.write("->");
+  findNode(list, matches) {
+    let current = list.first;
+
+    while (current !== null) {
+      const value = current.data !== undefined ? current.data : current;
+      if (matches(value)) {
+        return current;
       }
-      this.first = this.first.next
+      current = current.next;
     }
-    console.log();
+
+    return null;
+  }
+
+  traversingTheListAndDisplay(list) {
+    let current = list.first;
+
+    while (current !== null) {
+      const value = current.data !== undefined ? current.data : current;
+      console.log(value);
+      current = current.next;
+    }
   }
 }
