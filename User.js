@@ -6,17 +6,33 @@ class User{
     this.profile = profile;
     this.matches = new LinkedList();
 
-    this.interactionHistory = getItem("userHistory" + id);
+     this.interactionHistory = new LinkedList();
+
+  let savedHistory = getItem("userHistory_" + this.id);
+
+    if(savedHistory !==null){
+      for (let i = 0; i<savedHistory.length; i++){
+        this.interactionHistory.add(savedHistory[i])
+  }
+  }
   }
 
-  recordInteraction(message)
-  {
-    const event = {
-      dateTime: new Date().toLocaleString(), message:message
-    };
+ recordInteraction(message) {
+  let interaction = {
+    dateTime: new Date().toLocaleString(),
+    message: message
+  };
 
-    this.interactionHistory.push(event);
+  this.interactionHistory.add(interaction);
 
-    storeItem("userHistory" + this.id, this.interactionHistory);
+  let historyData = [];
+  let current = this.interactionHistory.first;
+
+  while (current != null) {
+    historyData.push(current.data);
+    current = current.next;
   }
+
+  storeItem("userHistory_" + this.id, historyData);
+}
 }
