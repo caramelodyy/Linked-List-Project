@@ -12,16 +12,22 @@ class Questionnaires
   }
 
   displayQuestions() {
-     this.name = text("What is your name?", 400,300);
-    this.age = text("How old are you?", 400,300);
-    this.hobby = text("What are your hobbies?",400,300);
-    this.placeOfResidence = text("Where do you live?",400,300);
+     let y = 60;
+     fill(255);
+      textSize(24);
 
-    this.minAge = text("What is your desired PenPal's minimum age?",400,300);
-
-    this.maxAge = text("What is your desired PenPal's maximum age?",400,300);
-
-    this.preferredLocation = text("Where would you like your PenPal to live?",400,300);
+      this.name = text("What is your name?", 50, y)
+      y += 40;
+      this.age = text("How old are you?", 50, y)
+      y += 40;
+      this.hobbies = text("What are your hobbies?", 50, y)
+      y += 40;
+      this.location = text("Where do you live?", 50, y)
+      y += 40;
+      this.preferredAgeRange = text("What is your preferred age range for a pen pal?", 50, y)
+      y += 40;
+      this.preferredLocation =text("What is your preferred location for a pen pal?", 50, y)
+      y += 40;
   }
 
   recordAnswer(question, answer) {
