@@ -1,6 +1,10 @@
 class Algorithms {
-  constructor() {
-   
+  constructor(age, hobby, areaOfResidence)
+  {
+    this.age = age;
+    this.hobby = hobby;
+    this.areaOfResidence = areaOfResidence;
+  }
   }
   
   sort() {} //sorts the LinkedList.
