@@ -7,7 +7,7 @@ class Questionnaires
     this.placeOfResidence = "";
 
     this.minAge = 0;
-    this.maxAge = 0;
+    this.maxAge = 100;
     this.preferredLocation = "";
   }
 

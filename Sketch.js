@@ -3,21 +3,14 @@ let stage = 0;
 let usernameInput;
 let passwordInput;
 
+let allProfiles;
+
 let loginMessage = "";
 
+allProfiles = new LinkedList;
 function setup() {
  createCanvas(800, 600);
-
-  dataBase = new LinkedList(2,"password: idk", "name: Jane Doe","age: 25","hobby: gardening",)
-
-  dataBase.add()
-  //let person = new Profile(1,"password: C001Pa55w0rd","name: John Doe","age: 24","hobby: video games", "Residence: Ontario Canada");
-
-  //print(person.name);
-  //print(person.passWord);
-  //print(person.age);
-  //print(person.hobby);
-  //print(person.placeOfResidence);
+ 
 }
 
 function draw() {
@@ -68,10 +61,13 @@ function draw() {
   // success login screen (temporarily)
   else if (stage == 2) {
     background(0);
-
+    fill(100);
+    rect( 0, 0, 400, 600);
     fill(255);
     textSize(50);
     text("Stage 2", 300, 300);
+    
+    
   }
 }
 

@@ -1,4 +1,4 @@
-01,"C00lne55","John",26,"video-games","gardening","music","Ontario","yapping"
+01,"C00lne55","John",26,"videogames","gardening","music","Ontario","yapping"
 02,"demo001","Ava",21,"painting","cycling","reading","Toronto-Canada","coffee" 
 03,"demo002","Liam",25,"gaming","cooking","hiking","London-United-Kingdom","music" 
 04,"demo003","Mia",19,"photography","swimming","drawing","Sydney-Australia","cats" 

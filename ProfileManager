@@ -20,7 +20,7 @@ constructor()
     if(user === null)
       return false;
     const removed = this.allUsers.removedById(id);
-    return.removed;
+    this.return.removed;
   } //remove a profile from the LinkedList
 
 
@@ -29,10 +29,15 @@ constructor()
    
   } //select a profile by using ID number
 
+  
+   editProfile() {
+    this.questionnaires = new Questionnaires();
+  }
+
+
   Validate(profile) {
     
   }//checks to see if profile has information properly filled.
-
+}
 
   
-}
