@@ -11,6 +11,7 @@ constructor()
     const user = new User(this.nextId, profile.username,profile);
     this.nextId++;
     this.allUsers.add(user);
+    
     return user;
   } //add a new profile and give it an ID number
 
@@ -29,15 +30,10 @@ constructor()
    
   } //select a profile by using ID number
 
-  
-   editProfile() {
-    this.questionnaires = new Questionnaires();
-  }
-
-
   Validate(profile) {
     
   }//checks to see if profile has information properly filled.
-}
+
 
   
+}
