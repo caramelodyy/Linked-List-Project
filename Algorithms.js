@@ -11,6 +11,7 @@ class Algorithms {
 
   displayMatchResults() {} //Displays the LinkedList that displays profiles that match.
 
+  // trying to fix this function right now
   traversingTheListAndDisplay() {
     while(this.first !== null) {
       process.stdout.write(head..toString());
