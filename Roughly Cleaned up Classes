@@ -1,0 +1,110 @@
+class Algorithms {
+  constructor(age, hobby, areaofResidence) {
+    this.age = age;
+    this.hobby = hobby;
+    this.areaofResidence = areaofResidence;
+  }
+  
+  sort() {} //sorts the LinkedList.
+
+  calculateMatches() {} //Calculates the profile's matches with other profiles.
+
+  filter() {} //deletes profiles that don't match in the profiles LinkedList. 
+
+  displayMatchResults() {} //Displays the LinkedList that displays profiles that match.
+
+   editProfile() {
+    this.questionnaires = new Questionnaires();
+  }
+
+}
+
+
+
+class LinkedList {
+  constructor() {
+    this.first = null;
+  }
+
+  add(iD, passWord, name, age, hobby, placeOfResidence) {
+    let user = new Profile(iD, passWord, name, age, hobby, placeOfResidence);
+    if (this.first == null) {
+      this.first = user;
+    } else {
+      let current = this.first;
+      while (current !== null) {
+        current = current.next;
+      }
+      current.next = user;
+    }
+  }
+
+  show() {
+    let current = this.first;
+    let position = 0;
+    while (current !== null) {
+      current.display();
+
+      current = current.next;
+      position++;
+    }
+  }
+}
+
+class ProfileManager
+{
+constructor()
+  {
+   this.allProfiles = new LinkedList()
+  }
+
+  addNewProfile() {
+    
+  }
+
+  
+  deleteProfile() {
+    
+  }
+
+
+  callProfile() {
+    
+  }
+
+  Validate() {
+    
+  }//checks to see if profile has information properly filled.
+
+}
+
+
+class Profile {
+  constructor(
+    iD,
+    passWord,
+    name,
+    age,
+    hobby1,
+    hobby2,
+    hobby3,
+    placeOfResidence,
+    likes
+  ) {
+    this.next = null;
+    this.iD = iD;
+    this.passWord = passWord;
+    this.name = name;
+    this.age = age;
+    this.hobby1 = hobby1;
+    this.hobby2 = hobby2;
+    this.hobby3 = hobby3;
+    this.placeOfResidence = placeOfResidence;
+    this.likes = likes
+    this.matches = new LinkedList();
+    Compatibility = 0;
+  }
+  display(iD, passWord, name, age, hobby1, hobby2, hobby3, placeOfResidence, likes, prefrences) {
+    text("");
+  }
+}
