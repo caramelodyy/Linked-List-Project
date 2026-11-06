@@ -1,39 +1,83 @@
-class ProfileManager
-{
-constructor()
-  {
-   this.allProfiles = new LinkedList()
+class ProfileManager {
+  constructor() {
+    this.allProfiles = new LinkedList();
+    this.acceptedProfiles = new LinkedList();
+    this.rejectedProfiles = new LinkedList();
+    this.currentUserProfile = null;
     this.nextId = 1;
-
   }
 
-  addNewProfile(profile) {
-    const user = new User(this.nextId, profile.username,profile);
+  loadProfilesFromText(lines) {
+    this.allProfiles = new LinkedList();
+
+    for (let line of lines) {
+      if (!line.trim()) continue;
+
+      let values = line.split(",");
+      values = values.map((value) => value.trim().replace(/^"|"$/g, ""));
+
+      if (values.length >= 9) {
+        const profile = new Profile(
+          values[0],
+          values[1],
+          values[2],
+          Number(values[3]) || 0,
+          values[4],
+          values[5],
+          values[6],
+          values[7],
+          values[8]
+        );
+
+        this.allProfiles.add(profile);
+      }
+    }
+
+    return this.allProfiles.toArray();
+  }
+
+  addNewProfile(profileData) {
+    const profile = new Profile(
+      this.nextId,
+      "default",
+      profileData.name,
+      profileData.age,
+      profileData.hobby,
+      "",
+      "",
+      profileData.placeOfResidence,
+      profileData.preferences.preferredLocation
+    );
+
     this.nextId++;
-    this.allUsers.add(user);
-    
-    return user;
-  } //add a new profile and give it an ID number
+    this.allProfiles.add(profile);
+    return profile;
+  }
 
-  
-  deleteProfile(id) {
-    const user = this.allUsers.findById(id);
-    if(user === null)
-      return false;
-    const removed = this.allUsers.removedById(id);
-    this.return.removed;
-  } //remove a profile from the LinkedList
+  saveCurrentUser(profileData) {
+    this.currentUserProfile = profileData;
+  }
 
+  validateProfile(profile) {
+    if (!profile) return false;
+    if (!profile.name || profile.name === "") return false;
+    if (!profile.age || profile.age <= 0) return false;
+    if (!profile.hobby || profile.hobby === "") return false;
+    if (!profile.placeOfResidence || profile.placeOfResidence === "") return false;
+    if (!profile.preferences) return false;
+    if (!profile.preferences.preferredLocation || profile.preferences.preferredLocation === "") return false;
+    return true;
+  }
 
-  callProfile(id) {
-    return this.alUsers.findById(id);
-   
-  } //select a profile by using ID number
+  getAllProfiles() {
+    return this.allProfiles.toArray();
+  }
 
-  Validate(profile) {
-    
-  }//checks to see if profile has information properly filled.
+  addAccepted(profile) {
+    this.acceptedProfiles.add(profile);
+  }
 
-
-  
+  addRejected(profile) {
+    this.rejectedProfiles.add(profile);
+  }
 }

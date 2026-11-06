@@ -8,12 +8,14 @@ class Questionnaires {
     this.minAge = 18;
     this.maxAge = 80;
     this.preferredLocation = "";
+    this.message = "";
 
     this.hobbyOptions = [];
     this.locationOptions = [];
     this.ageOptions = [];
     this.formBuilt = false;
     this.optionsLoaded = false;
+    this.submitButton = null;
   }
 
   loadProfileOptions() {
@@ -27,9 +29,7 @@ class Questionnaires {
       const ageSet = new Set();
 
       for (let line of lines) {
-        if (!line.trim()) {
-          continue;
-        }
+        if (!line.trim()) continue;
 
         let values = line.split(",");
         values = values.map((value) => value.trim().replace(/^"|"$/g, ""));
@@ -61,109 +61,121 @@ class Questionnaires {
     }
 
     this.nameInput = createInput();
-  this.nameInput.position(60, 80);
-  this.nameInput.size(320, 40);
-  this.nameInput.style("font-size", "22px");
-  this.nameInput.input(() => {
-    this.name = this.nameInput.value();
-  });
+    this.nameInput.position(60, 80);
+    this.nameInput.size(320, 40);
+    this.nameInput.style("font-size", "22px");
+    this.nameInput.input(() => {
+      this.name = this.nameInput.value();
+    });
 
-  this.ageSelect = createSelect();
-  this.ageSelect.position(60, 180);
-  this.ageSelect.size(180, 40);
-  this.ageSelect.style("font-size", "20px");
-  this.ageSelect.option("Choose age");
-  for (let age of this.ageOptions) {
-    this.ageSelect.option(String(age));
-  }
-  this.ageSelect.changed(() => {
-    this.age = Number(this.ageSelect.value()) || 0;
-  });
+    this.ageSelect = createSelect();
+    this.ageSelect.position(60, 180);
+    this.ageSelect.size(180, 40);
+    this.ageSelect.style("font-size", "20px");
+    this.ageSelect.option("Choose age");
+    for (let age of this.ageOptions) {
+      this.ageSelect.option(String(age));
+    }
+    this.ageSelect.changed(() => {
+      this.age = Number(this.ageSelect.value()) || 0;
+    });
 
-  this.hobbySelect = createSelect();
-  this.hobbySelect.position(60, 280);
-  this.hobbySelect.size(360, 40);
-  this.hobbySelect.style("font-size", "20px");
-  this.hobbySelect.option("Choose a hobby");
-  for (let hobby of this.hobbyOptions) {
-    this.hobbySelect.option(hobby);
-  }
-  this.hobbySelect.changed(() => {
-    this.hobby = this.hobbySelect.value();
-  });
+    this.hobbySelect = createSelect();
+    this.hobbySelect.position(60, 280);
+    this.hobbySelect.size(360, 40);
+    this.hobbySelect.style("font-size", "20px");
+    this.hobbySelect.option("Choose a hobby");
+    for (let hobby of this.hobbyOptions) {
+      this.hobbySelect.option(hobby);
+    }
+    this.hobbySelect.changed(() => {
+      this.hobby = this.hobbySelect.value();
+    });
 
-  this.locationSelect = createSelect();
-  this.locationSelect.position(60, 380);
-  this.locationSelect.size(360, 40);
-  this.locationSelect.style("font-size", "20px");
-  this.locationSelect.option("Choose a location");
-  for (let location of this.locationOptions) {
-    this.locationSelect.option(location);
-  }
-  this.locationSelect.changed(() => {
-    this.placeOfResidence = this.locationSelect.value();
-  });
+    this.locationSelect = createSelect();
+    this.locationSelect.position(60, 380);
+    this.locationSelect.size(360, 40);
+    this.locationSelect.style("font-size", "20px");
+    this.locationSelect.option("Choose a location");
+    for (let location of this.locationOptions) {
+      this.locationSelect.option(location);
+    }
+    this.locationSelect.changed(() => {
+      this.placeOfResidence = this.locationSelect.value();
+    });
 
-  this.minAgeSelect = createSelect();
-  this.minAgeSelect.position(60, 480);
-  this.minAgeSelect.size(140, 40);
-  this.minAgeSelect.style("font-size", "20px");
-  this.minAgeSelect.option("Min");
-  for (let age of this.ageOptions) {
-    this.minAgeSelect.option(String(age));
-  }
-  this.minAgeSelect.changed(() => {
-    this.minAge = Number(this.minAgeSelect.value()) || 0;
-  });
+    this.minAgeSelect = createSelect();
+    this.minAgeSelect.position(60, 480);
+    this.minAgeSelect.size(140, 40);
+    this.minAgeSelect.style("font-size", "20px");
+    this.minAgeSelect.option("Min");
+    for (let age of this.ageOptions) {
+      this.minAgeSelect.option(String(age));
+    }
+    this.minAgeSelect.changed(() => {
+      this.minAge = Number(this.minAgeSelect.value()) || 0;
+    });
 
-  this.maxAgeSelect = createSelect();
-  this.maxAgeSelect.position(240, 480);
-  this.maxAgeSelect.size(140, 40);
-  this.maxAgeSelect.style("font-size", "20px");
-  this.maxAgeSelect.option("Max");
-  for (let age of this.ageOptions) {
-    this.maxAgeSelect.option(String(age));
-  }
-  this.maxAgeSelect.changed(() => {
-    this.maxAge = Number(this.maxAgeSelect.value()) || 0;
-  });
+    this.maxAgeSelect = createSelect();
+    this.maxAgeSelect.position(240, 480);
+    this.maxAgeSelect.size(140, 40);
+    this.maxAgeSelect.style("font-size", "20px");
+    this.maxAgeSelect.option("Max");
+    for (let age of this.ageOptions) {
+      this.maxAgeSelect.option(String(age));
+    }
+    this.maxAgeSelect.changed(() => {
+      this.maxAge = Number(this.maxAgeSelect.value()) || 0;
+    });
 
-  this.preferredLocationSelect = createSelect();
-  this.preferredLocationSelect.position(60, 580);
-  this.preferredLocationSelect.size(360, 40);
-  this.preferredLocationSelect.style("font-size", "20px");
-  this.preferredLocationSelect.option("Choose a preferred location");
-  for (let location of this.locationOptions) {
-    this.preferredLocationSelect.option(location);
-  }
-  this.preferredLocationSelect.changed(() => {
-    this.preferredLocation = this.preferredLocationSelect.value();
-  });
+    this.preferredLocationSelect = createSelect();
+    this.preferredLocationSelect.position(60, 580);
+    this.preferredLocationSelect.size(360, 40);
+    this.preferredLocationSelect.style("font-size", "20px");
+    this.preferredLocationSelect.option("Choose a preferred location");
+    for (let location of this.locationOptions) {
+      this.preferredLocationSelect.option(location);
+    }
+    this.preferredLocationSelect.changed(() => {
+      this.preferredLocation = this.preferredLocationSelect.value();
+    });
 
-  this.formBuilt = true;
-}
+    this.submitButton = createButton("Submit");
+    this.submitButton.position(60, 650);
+    this.submitButton.size(180, 50);
+    this.submitButton.style("font-size", "18px");
+    this.submitButton.mousePressed(() => this.submitQuestionnaire());
 
-displayQuestions() {
-  if (!this.optionsLoaded) {
-    this.loadProfileOptions();
-    return;
-  }
-
-  if (!this.formBuilt) {
-    this.buildForm();
+    this.formBuilt = true;
   }
 
-  background(255);
-  fill(0);
-  textSize(30);
+  displayQuestions() {
+    if (!this.optionsLoaded) {
+      this.loadProfileOptions();
+      return;
+    }
 
-  text("What is your name?", 60, 60);
-  text("How old are you?", 60, 160);
-  text("What are your hobbies?", 60, 260);
-  text("Where do you live?", 60, 360);
-  text("What is your preferred age range?", 60, 460);
-  text("What is your preferred location?", 60, 560);
-}
+    if (!this.formBuilt) {
+      this.buildForm();
+    }
+
+    background(255);
+    fill(0);
+    textSize(30);
+
+    text("What is your name?", 60, 60);
+    text("How old are you?", 60, 160);
+    text("What are your hobbies?", 60, 260);
+    text("Where do you live?", 60, 360);
+    text("What is your preferred age range?", 60, 460);
+    text("What is your preferred location?", 60, 560);
+
+    if (this.message !== "") {
+      fill(255, 0, 0);
+      textSize(24);
+      text(this.message, 60, 720);
+    }
+  }
 
   recordAnswer(question, answer) {
     if (question === "name") {
@@ -182,27 +194,46 @@ displayQuestions() {
   }
 
   validateAnswers() {
-    if (this.name === "" || this.age <= 0 || this.hobby === "" || this.placeOfResidence === "" || this.minAge <= 0 || this.maxAge < this.minAge) {
+    if (
+      this.name === "" ||
+      this.age <= 0 ||
+      this.hobby === "" ||
+      this.placeOfResidence === "" ||
+      this.minAge <= 0 ||
+      this.maxAge < this.minAge ||
+      this.preferredLocation === ""
+    ) {
       return false;
     }
     return true;
   }
 
   submitQuestionnaire() {
-    if (this.validateAnswers()) {
-      profile.name = this.name;
-      profile.age = this.age;
-      profile.hobby = this.hobby;
-      profile.placeOfResidence = this.placeOfResidence;
+    if (!this.validateAnswers()) {
+      this.message = "Please fill all information";
+      return;
+    }
 
-      profile.preferences = {
+    this.message = "";
+
+    currentUserProfile = {
+      name: this.name,
+      age: this.age,
+      hobby: this.hobby,
+      placeOfResidence: this.placeOfResidence,
+      preferences: {
         minAge: this.minAge,
         maxAge: this.maxAge,
         preferredLocation: this.preferredLocation
-      };
-      print("Profile Updated");
-    } else {
-      print("Please fill all information");
+      }
+    };
+
+    if (typeof profileManager !== "undefined") {
+      profileManager.saveCurrentUser(currentUserProfile);
+    }
+
+    if (typeof startMatchCalculation === "function") {
+      startMatchCalculation();
     }
   }
 }
