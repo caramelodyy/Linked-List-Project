@@ -1,75 +1,204 @@
-class Questionnaires
-  {
-    constructor() {
+class Questionnaires {
+  constructor() {
     this.name = "";
     this.age = 0;
     this.hobby = "";
     this.placeOfResidence = "";
 
-    this.minAge = 0;
-    this.maxAge = 100;
+    this.minAge = 18;
+    this.maxAge = 80;
     this.preferredLocation = "";
+
+    this.hobbyOptions = [];
+    this.locationOptions = [];
+    this.ageOptions = [];
+    this.formBuilt = false;
+    this.optionsLoaded = false;
   }
 
-  displayQuestions() {
-     let y = 60;
-     fill(255);
-      textSize(24);
-
-      this.name = text("What is your name?", 50, y)
-      y += 40;
-      this.age = text("How old are you?", 50, y)
-      y += 40;
-      this.hobbies = text("What are your hobbies?", 50, y)
-      y += 40;
-      this.location = text("Where do you live?", 50, y)
-      y += 40;
-      this.preferredAgeRange = text("What is your preferred age range for a pen pal?", 50, y)
-      y += 40;
-      this.preferredLocation =text("What is your preferred location for a pen pal?", 50, y)
-      y += 40;
-  }
-
-  recordAnswer(question, answer) {
-    // Store an answer
-    if (
-      this.name == "" ||
-      this.age <= 0 ||
-      this.hobby == "" ||
-      this.placeOfResidence == "" ||
-      this.minAge <= 0 ||
-      this.maxAge < this.minAge
-    ) {
-      return false;
+  loadProfileOptions() {
+    if (this.optionsLoaded) {
+      return;
     }
 
-    return true;
+    loadStrings("profiles.txt", (lines) => {
+      const hobbySet = new Set();
+      const locationSet = new Set();
+      const ageSet = new Set();
+
+      for (let line of lines) {
+        if (!line.trim()) {
+          continue;
+        }
+
+        let values = line.split(",");
+        values = values.map((value) => value.trim().replace(/^"|"$/g, ""));
+
+        if (values.length >= 8) {
+          hobbySet.add(values[4]);
+          hobbySet.add(values[5]);
+          hobbySet.add(values[6]);
+          locationSet.add(values[7]);
+        }
+
+        if (values.length >= 4 && Number(values[3])) {
+          ageSet.add(Number(values[3]));
+        }
+      }
+
+      this.hobbyOptions = [...hobbySet].filter(Boolean).sort();
+      this.locationOptions = [...locationSet].filter(Boolean).sort();
+      this.ageOptions = [...ageSet].filter(Number.isFinite).sort((a, b) => a - b);
+
+      this.optionsLoaded = true;
+      this.buildForm();
+    });
+  }
+
+  buildForm() {
+    if (this.formBuilt || typeof createSelect !== "function") {
+      return;
+    }
+
+    this.nameInput = createInput();
+  this.nameInput.position(60, 90);
+  this.nameInput.size(320, 40);
+  this.nameInput.style("font-size", "22px");
+  this.nameInput.input(() => {
+    this.name = this.nameInput.value();
+  });
+
+  this.ageInput = createInput("18", "number");
+  this.ageInput.position(60, 150);
+  this.ageInput.size(180, 40);
+  this.ageInput.style("font-size", "22px");
+  this.ageInput.input(() => {
+    this.age = Number(this.ageInput.value()) || 0;
+  });
+
+  this.hobbySelect = createSelect();
+  this.hobbySelect.position(60, 210);
+  this.hobbySelect.size(360, 40);
+  this.hobbySelect.style("font-size", "20px");
+  this.hobbySelect.option("Choose a hobby");
+  for (let hobby of this.hobbyOptions) {
+    this.hobbySelect.option(hobby);
+  }
+  this.hobbySelect.changed(() => {
+    this.hobby = this.hobbySelect.value();
+  });
+
+  this.locationSelect = createSelect();
+  this.locationSelect.position(60, 270);
+  this.locationSelect.size(360, 40);
+  this.locationSelect.style("font-size", "20px");
+  this.locationSelect.option("Choose a location");
+  for (let location of this.locationOptions) {
+    this.locationSelect.option(location);
+  }
+  this.locationSelect.changed(() => {
+    this.placeOfResidence = this.locationSelect.value();
+  });
+
+  this.minAgeSelect = createSelect();
+  this.minAgeSelect.position(60, 330);
+  this.minAgeSelect.size(140, 40);
+  this.minAgeSelect.style("font-size", "20px");
+  this.minAgeSelect.option("Min");
+  for (let age of this.ageOptions) {
+    this.minAgeSelect.option(String(age));
+  }
+  this.minAgeSelect.changed(() => {
+    this.minAge = Number(this.minAgeSelect.value()) || 0;
+  });
+
+  this.maxAgeSelect = createSelect();
+  this.maxAgeSelect.position(240, 330);
+  this.maxAgeSelect.size(140, 40);
+  this.maxAgeSelect.style("font-size", "20px");
+  this.maxAgeSelect.option("Max");
+  for (let age of this.ageOptions) {
+    this.maxAgeSelect.option(String(age));
+  }
+  this.maxAgeSelect.changed(() => {
+    this.maxAge = Number(this.maxAgeSelect.value()) || 0;
+  });
+
+  this.preferredLocationSelect = createSelect();
+  this.preferredLocationSelect.position(60, 390);
+  this.preferredLocationSelect.size(360, 40);
+  this.preferredLocationSelect.style("font-size", "20px");
+  this.preferredLocationSelect.option("Choose a preferred location");
+  for (let location of this.locationOptions) {
+    this.preferredLocationSelect.option(location);
+  }
+  this.preferredLocationSelect.changed(() => {
+    this.preferredLocation = this.preferredLocationSelect.value();
+  });
+
+  this.formBuilt = true;
+}
+
+displayQuestions() {
+  if (!this.optionsLoaded) {
+    this.loadProfileOptions();
+    return;
+  }
+
+  if (!this.formBuilt) {
+    this.buildForm();
+  }
+
+  background(255);
+  fill(0);
+  textSize(30);
+
+  text("What is your name?", 60, 60);
+  text("How old are you?", 60, 120);
+  text("What are your hobbies?", 60, 180);
+  text("Where do you live?", 60, 240);
+  text("What is your preferred age range?", 60, 300);
+  text("What is your preferred location?", 60, 360);
+}
+
+  recordAnswer(question, answer) {
+    if (question === "name") {
+      this.name = answer;
+    } else if (question === "age") {
+      this.age = Number(answer) || 0;
+    } else if (question === "hobby") {
+      this.hobby = answer;
+    } else if (question === "placeOfResidence") {
+      this.placeOfResidence = answer;
+    } else if (question === "preferredLocation") {
+      this.preferredLocation = answer;
+    }
+
+    return this.validateAnswers();
   }
 
   validateAnswers() {
-    // Check required answers
-    if(this.name == ""||this.age<=0||this.hobby==""||this.placeOfResidence==""||this.minAge<=0||this.maxAge<this.minAge)
-    {
+    if (this.name === "" || this.age <= 0 || this.hobby === "" || this.placeOfResidence === "" || this.minAge <= 0 || this.maxAge < this.minAge) {
       return false;
     }
     return true;
   }
 
   submitQuestionnaire() {
-    // Submit answers and update profiles
-    if(this.validateAnswers())
-    {
+    if (this.validateAnswers()) {
       profile.name = this.name;
       profile.age = this.age;
       profile.hobby = this.hobby;
       profile.placeOfResidence = this.placeOfResidence;
 
       profile.preferences = {
-        minAge: this.minAge, maxAge: this.maxAge, preferredLocation: this.preferredLocation};
+        minAge: this.minAge,
+        maxAge: this.maxAge,
+        preferredLocation: this.preferredLocation
+      };
       print("Profile Updated");
-      }
-    else {
-      print("Please fill all information")
+    } else {
+      print("Please fill all information");
     }
   }
 }

@@ -8,8 +8,7 @@ let q = new Questionnaires();
 
 allProfiles = new LinkedList;
 function setup() {
- createCanvas(800, 600);
- 
+  createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
