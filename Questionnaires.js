@@ -61,23 +61,27 @@ class Questionnaires {
     }
 
     this.nameInput = createInput();
-  this.nameInput.position(60, 90);
+  this.nameInput.position(60, 80);
   this.nameInput.size(320, 40);
   this.nameInput.style("font-size", "22px");
   this.nameInput.input(() => {
     this.name = this.nameInput.value();
   });
 
-  this.ageInput = createInput("18", "number");
-  this.ageInput.position(60, 150);
-  this.ageInput.size(180, 40);
-  this.ageInput.style("font-size", "22px");
-  this.ageInput.input(() => {
-    this.age = Number(this.ageInput.value()) || 0;
+  this.ageSelect = createSelect();
+  this.ageSelect.position(60, 180);
+  this.ageSelect.size(180, 40);
+  this.ageSelect.style("font-size", "20px");
+  this.ageSelect.option("Choose age");
+  for (let age of this.ageOptions) {
+    this.ageSelect.option(String(age));
+  }
+  this.ageSelect.changed(() => {
+    this.age = Number(this.ageSelect.value()) || 0;
   });
 
   this.hobbySelect = createSelect();
-  this.hobbySelect.position(60, 210);
+  this.hobbySelect.position(60, 280);
   this.hobbySelect.size(360, 40);
   this.hobbySelect.style("font-size", "20px");
   this.hobbySelect.option("Choose a hobby");
@@ -89,7 +93,7 @@ class Questionnaires {
   });
 
   this.locationSelect = createSelect();
-  this.locationSelect.position(60, 270);
+  this.locationSelect.position(60, 380);
   this.locationSelect.size(360, 40);
   this.locationSelect.style("font-size", "20px");
   this.locationSelect.option("Choose a location");
@@ -101,7 +105,7 @@ class Questionnaires {
   });
 
   this.minAgeSelect = createSelect();
-  this.minAgeSelect.position(60, 330);
+  this.minAgeSelect.position(60, 480);
   this.minAgeSelect.size(140, 40);
   this.minAgeSelect.style("font-size", "20px");
   this.minAgeSelect.option("Min");
@@ -113,7 +117,7 @@ class Questionnaires {
   });
 
   this.maxAgeSelect = createSelect();
-  this.maxAgeSelect.position(240, 330);
+  this.maxAgeSelect.position(240, 480);
   this.maxAgeSelect.size(140, 40);
   this.maxAgeSelect.style("font-size", "20px");
   this.maxAgeSelect.option("Max");
@@ -125,7 +129,7 @@ class Questionnaires {
   });
 
   this.preferredLocationSelect = createSelect();
-  this.preferredLocationSelect.position(60, 390);
+  this.preferredLocationSelect.position(60, 580);
   this.preferredLocationSelect.size(360, 40);
   this.preferredLocationSelect.style("font-size", "20px");
   this.preferredLocationSelect.option("Choose a preferred location");
@@ -154,11 +158,11 @@ displayQuestions() {
   textSize(30);
 
   text("What is your name?", 60, 60);
-  text("How old are you?", 60, 120);
-  text("What are your hobbies?", 60, 180);
-  text("Where do you live?", 60, 240);
-  text("What is your preferred age range?", 60, 300);
-  text("What is your preferred location?", 60, 360);
+  text("How old are you?", 60, 160);
+  text("What are your hobbies?", 60, 260);
+  text("Where do you live?", 60, 360);
+  text("What is your preferred age range?", 60, 460);
+  text("What is your preferred location?", 60, 560);
 }
 
   recordAnswer(question, answer) {
