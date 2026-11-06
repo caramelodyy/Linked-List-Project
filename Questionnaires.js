@@ -149,6 +149,25 @@ class Questionnaires {
     this.formBuilt = true;
   }
 
+  hideForm() {
+    const elements = [
+      this.nameInput,
+      this.ageSelect,
+      this.hobbySelect,
+      this.locationSelect,
+      this.minAgeSelect,
+      this.maxAgeSelect,
+      this.preferredLocationSelect,
+      this.submitButton
+    ];
+
+    for (let element of elements) {
+      if (element && typeof element.remove === "function") {
+        element.remove();
+      }
+    }
+  }
+
   displayQuestions() {
     if (!this.optionsLoaded) {
       this.loadProfileOptions();
@@ -231,6 +250,8 @@ class Questionnaires {
     if (typeof profileManager !== "undefined") {
       profileManager.saveCurrentUser(currentUserProfile);
     }
+
+    this.hideForm();
 
     if (typeof startMatchCalculation === "function") {
       startMatchCalculation();
