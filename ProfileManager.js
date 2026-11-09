@@ -33,7 +33,7 @@ class ProfileManager {
       }
     }
 
-    return this.allProfiles.toArray();
+    return this.allProfiles.getFromArray();
   }
 
   addNewProfile(profileData) {
