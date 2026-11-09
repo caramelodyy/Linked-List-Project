@@ -1,56 +1,77 @@
 class Algorithms {
-  constructor() {
-    this.age = 0;
-    this.hobby = "";
-    this.areaOfResidence = "";
-  }
-
-  sortProfiles(profiles) {
-    return [...profiles].sort((a, b) => (b.Compatibility || 0) - (a.Compatibility || 0));
-  }
-
-  filterProfiles(profiles, userProfile) {
-    return profiles.filter((profile) => {
-      const ageMatch = profile.age >= userProfile.preferences.minAge && profile.age <= userProfile.preferences.maxAge;
-      const locationMatch = userProfile.preferences.preferredLocation === "" || profile.placeOfResidence === userProfile.preferences.preferredLocation;
-      const hobbyMatch = [profile.hobby1, profile.hobby2, profile.hobby3].includes(userProfile.hobby);
-
-      return ageMatch && locationMatch && hobbyMatch;
+  sortProfiles(profiles) { //slice() = creates an empty copy of the array for it to sort.
+    return profiles.slice().sort((first, second) => {
+      return (second.Compatibility || 0) - (first.Compatibility || 0);
     });
   }
 
-  calculateMatches(userProfile, profiles) {
-    const results = profiles.map((profile) => {
-      let score = 0;
+  filterProfiles(profiles, userProfile) { //filtering the profiles based on the user's preferences, such as age range, location, and hobbies.
+    const matches = [];
 
-      if (profile.age >= userProfile.preferences.minAge && profile.age <= userProfile.preferences.maxAge) {
-        score += 30;
+    for (const profile of profiles) {
+      const age = Number(profile.age);
+      const ageMatches =
+        age >= userProfile.preferences.minAge &&
+        age <= userProfile.preferences.maxAge;
+
+      const locationMatches =
+        userProfile.preferences.preferredLocation === "" ||
+        profile.placeOfResidence === userProfile.preferences.preferredLocation;
+
+      const hobbies = [profile.hobby1, profile.hobby2, profile.hobby3];
+      const hobbyMatches = hobbies.includes(userProfile.hobby);
+
+      if (ageMatches && locationMatches && hobbyMatches) {
+        matches.push(profile);
+      }
+    }
+
+    return matches;
+  }
+
+  calculateMatches(userProfile, profiles) { //calcylating the compatibility score for each profile based on the user's preferences and the profile's attributes. The compatibility score is calculated based on age, location, and hobbies.
+    const matches = [];
+
+    for (const profile of profiles) {
+      let compatibility = 0;
+      const age = Number(profile.age);
+      const hobbies = [profile.hobby1, profile.hobby2, profile.hobby3];
+
+      if (
+        age >= userProfile.preferences.minAge &&
+        age <= userProfile.preferences.maxAge
+      ) {
+        compatibility += 30;
       }
 
       if (profile.placeOfResidence === userProfile.preferences.preferredLocation) {
-        score += 35;
+        compatibility += 35;
       }
 
       if (profile.placeOfResidence === userProfile.placeOfResidence) {
-        score += 10;
+        compatibility += 10;
       }
 
-      if ([profile.hobby1, profile.hobby2, profile.hobby3].includes(userProfile.hobby)) {
-        score += 25;
+      if (hobbies.includes(userProfile.hobby)) {
+        compatibility += 25;
       }
 
-      const profileHobbies = [profile.hobby1, profile.hobby2, profile.hobby3].map((hobby) => hobby.toLowerCase());
-      if (profileHobbies.includes(userProfile.hobby.toLowerCase())) {
-        score += 20;
+      const userHobby = userProfile.hobby.toLowerCase();
+      const hasSameHobby = hobbies.some((hobby) => {
+        return hobby.toLowerCase() === userHobby;
+      });
+
+      if (hasSameHobby) {
+        compatibility += 20;
       }
 
-      return {
+      matches.push({
         ...profile,
-        Compatibility: score
-      };
-    });
+        Compatibility: compatibility
+      });
+    }
 
-    return this.sortProfiles(results.filter((profile) => profile.Compatibility > 0));
+    return this.sortProfiles(matches);
   }
 
   displayMatchResults(matches) {

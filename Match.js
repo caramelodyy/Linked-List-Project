@@ -9,7 +9,7 @@ class Match{
     this.status = "Suggested";
   }
 
-  updateStatus()
+  updateStatus() //Updates the status of the match to either "Accepted" or "Rejected" and records the interaction between the two users.
   {
     if(newStatus !== "Accepted" && newStatus !== "Rejected")
       return;
@@ -17,7 +17,8 @@ class Match{
     if(newStatus !== "Accepted")
       return;
 
-    this.status = newStatus;
+    this.status = newStatus; //shows up a message to the user indicating that they have matched with the other user and the status of the match. 
+    //It also records the interaction between the two users and their profiles in local storage.
 
     const message1 = "Matched with " + this.user2.username + "was" + this.newStatus;
 
@@ -29,7 +30,7 @@ class Match{
     this.user1.profile.recordInteraction(message1)
     this.user2.profile.recordInteraction(message2)
 
-    storeItem("match_" + this.id, {
+    storeItem("match_" + this.id, { //storing a history of the matches made.
       id: this.id,
       user1Id: this.user1.id,
       user2Id: this.user2.id,

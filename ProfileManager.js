@@ -7,14 +7,28 @@ class ProfileManager {
     this.nextId = 1;
   }
 
-  loadProfilesFromText(lines) {
+
+
+  loadProfilesFromText(lines) { //getting profile data from the txt file.
     this.allProfiles = new LinkedList();
 
     for (let line of lines) {
       if (!line.trim()) continue;
 
       let values = line.split(",");
-      values = values.map((value) => value.trim().replace(/^"|"$/g, ""));
+      values = values.map((value) => {
+        value = value.trim(); //trim removes whitespace from both ends of a string.
+
+        if (value.startsWith('"')) {
+          value = value.substring(1); //substring takes the text from the first character to the last character of the string.
+        }
+
+        if (value.endsWith('"')) {
+          value = value.substring(0, value.length - 1);
+        }
+
+        return value;
+      });
 
       if (values.length >= 9) {
         const profile = new Profile(
@@ -33,7 +47,7 @@ class ProfileManager {
       }
     }
 
-    return this.allProfiles.getFromArray();
+    return this.allProfiles.toArray();
   }
 
   addNewProfile(profileData) {
@@ -70,7 +84,7 @@ class ProfileManager {
   }
 
   getAllProfiles() {
-    return this.allProfiles.toArray();
+    return this.allProfiles.getFromArray();
   }
 
   addAccepted(profile) {

@@ -175,9 +175,14 @@ function drawHistoryScreen() {
   });
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function mousePressed() {
   if (stage == 0) {
     if (mouseX >= 125 && mouseX <= 525 && mouseY >= 325 && mouseY <= 475) {
+    
       stage = 1;
       usernameInput = createInput();
       usernameInput.position(180, 215);
@@ -224,7 +229,7 @@ function checkLogin() {
 }
 
 function loadProfiles() {
-  loadStrings("profiles.txt", function(lines) {
+  loadStrings("profiles.txt", function(lines) { //line loads the profiles.txt file. When the file is ready, it gives each line of the file to the function as lines, so the program can use the profile information.
     profileData = profileManager.loadProfilesFromText(lines);
     allProfiles = profileManager.allProfiles;
   });
@@ -247,7 +252,7 @@ function calculateMatches() {
   currentMatchIndex = 0;
 }
 
-function storeDecision(decision) {
+function storeDecision(decision) { 
   if (currentMatchIndex >= matchedProfiles.length) {
     return;
   }

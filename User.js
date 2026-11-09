@@ -19,7 +19,7 @@ class User{
 
  recordInteraction(message) {
   let interaction = {
-    dateTime: new Date().toLocaleString(),
+    dateTime: new Date().toLocaleString(), //sets to current date and time when the interaction is recorded.
     message: message
   };
 
@@ -33,6 +33,6 @@ class User{
     current = current.next;
   }
 
-  storeItem("userHistory_" + this.id, historyData);
+  storeItem("userHistory_" + this.id, historyData); //storing the interaction history in local storage with a unique key based on the user's ID.
 }
 }

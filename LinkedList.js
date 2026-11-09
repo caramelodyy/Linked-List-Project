@@ -28,7 +28,7 @@ class LinkedList {
     return newNode;
   }
 
-  toArray() {
+  getFromArray() {
     const result = [];
     let current = this.first;
 
@@ -41,7 +41,7 @@ class LinkedList {
   }
 
   display() {
-    const list = this.toArray();
+    const list = this.getFromArray();
     console.log(list);
   }
 }

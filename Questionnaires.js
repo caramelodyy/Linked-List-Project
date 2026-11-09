@@ -32,7 +32,19 @@ class Questionnaires {
         if (!line.trim()) continue;
 
         let values = line.split(",");
-        values = values.map((value) => value.trim().replace(/^"|"$/g, ""));
+        values = values.map((value) => {
+          value = value.trim();
+
+          if (value.startsWith('"')) {
+            value = value.substring(1); //removes quotes.
+          }
+
+          if (value.endsWith('"')) {
+            value = value.substring(0, value.length - 1);
+          }
+
+          return value;
+        });
 
         if (values.length >= 8) {
           hobbySet.add(values[4]);
@@ -55,7 +67,7 @@ class Questionnaires {
     });
   }
 
-  buildForm() {
+  buildForm() { //the form for it to display.
     if (this.formBuilt || typeof createSelect !== "function") {
       return;
     }
@@ -149,7 +161,7 @@ class Questionnaires {
     this.formBuilt = true;
   }
 
-  hideForm() {
+  hideForm() { //after submitting, it will hide the questions.
     const elements = [
       this.nameInput,
       this.ageSelect,
@@ -247,7 +259,7 @@ class Questionnaires {
       }
     };
 
-    if (typeof profileManager !== "undefined") {
+    if (typeof profileManager !== "undefined") { //typeof makes sure the system provided createselect beore the code stops building the answers.
       profileManager.saveCurrentUser(currentUserProfile);
     }
 
