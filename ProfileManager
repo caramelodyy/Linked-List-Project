@@ -1,65 +1,92 @@
 
 
-class ProfileManager
-{
-constructor()
-  {
-   allProfiles = new LinkedList()
+class ProfileManager {
+  constructor() {
+    this.allProfiles = new LinkedList();
     this.nextId = 1;
-
+    this.questionnaires = null;
   }
 
-async loadProfiles(){
-let lines;
+  async loadProfiles() {
+    try {
+      const lines = await loadStrings('./Data/profiles.txt');
+      for (const line of lines) {
+        if (!line || !line.trim()) {
+          continue;
+        }
 
-  lines = await loadStrings('./Data/profiles.txt');
-  for (let line of lines) {
-    let values = line.split(",");
-    let userProfile = new Profile(
-      values[0],
-      values[1],
-      values[2],
-      values[3],
-      values[4],
-      values[5],
-      values[6],
-      values[7],
-      values[8]
-    );
-    this.allProfiles.add(userProfile)
+        const values = line
+          .split(',')
+          .map((value) => value.trim().replace(/^"|"$/g, ''));
+
+        if (values.length < 9) {
+          continue;
+        }
+
+        const userProfile = new Profile(
+          values[0],
+          values[1],
+          values[2],
+          values[3],
+          values[4],
+          values[5],
+          values[6],
+          values[7],
+          values[8]
+        );
+
+        this.allProfiles.add(userProfile);
+      }
+    } catch (error) {
+      console.error('Failed to load profiles:', error);
+    }
   }
-}
 
   addNewProfile(iD, passWord, name, age, hobby1, hobby2, hobby3, placeOfResidence, likes) {
-    let profile = new Profile(this.iD, this.passWord, this.name, this.age, this.hobby1, this.hobby2, this.hobby3, this.placeOfResidence, this.likes);
-    allProfiles.add(profile)
+    const profileId = iD !== undefined && iD !== null ? iD : this.nextId++;
+    const profile = new Profile(
+      profileId,
+      passWord,
+      name,
+      age,
+      hobby1,
+      hobby2,
+      hobby3,
+      placeOfResidence,
+      likes
+    );
+
+    this.allProfiles.add(profile);
     return profile;
   }
-  
-  deleteProfile() {
-    
 
-
-
-    
-  } //remove a profile from the LinkedList
-
-
-  } //select a profile by using ID number
-
-  
-   editProfile() {
-    this.questionnaires = new Questionnaires();
+  deleteProfile(iD) {
+    return this.allProfiles.delete(iD);
   }
 
+  //select a profile by using ID number
+  editProfile() {
+    this.questionnaires = new Questionnaires();
+    return this.questionnaires;
+  }
 
   Validate(profile) {
-    
+    if (!profile) {
+      return false;
+    }
 
-
-
-
-  }//checks to see if profile has information properly filled.
+    return Boolean(
+      profile.iD &&
+      profile.passWord &&
+      profile.name &&
+      profile.age &&
+      profile.hobby1 &&
+      profile.hobby2 &&
+      profile.hobby3 &&
+      profile.placeOfResidence &&
+      profile.likes
+    );
+  }
 }
 
   

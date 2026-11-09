@@ -90,7 +90,7 @@ function mousePressed() {
       passwordInput = createInput();
       passwordInput.position(180, 315);
       passwordInput.size(390, 40);
-      passwordInput.attribute("type", "text");
+      passwordInput.attribute("type", "password");
     }
   }
 

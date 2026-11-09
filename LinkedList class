@@ -21,18 +21,18 @@ class LinkedList {
 
 
 
-  delete(Profile, id) {
+  delete( iD) {
 if(this.first === null){
 return false;
 } 
-if(String(this.first.iD) === String(id)) {
+if(String(this.first.iD) === String(iD)) {
   this.first = this.first.next;
   return true
 }
 
 let current = this.first;
 while(current.next !== null) {
-  if( String(current.next.iD) === String(id)) {
+  if( String(current.next.iD) === String(iD)) {
    current.next = current.next.next;
    return true;
   }
