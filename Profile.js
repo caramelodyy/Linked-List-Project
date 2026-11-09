@@ -22,7 +22,6 @@ class Profile {
     this.likes = String(likes);
     this.matches = new LinkedList();
     this.Compatibility = 0;
-    this.next = null;
   }
   display(
     y 
