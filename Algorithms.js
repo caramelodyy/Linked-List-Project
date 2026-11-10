@@ -8,6 +8,8 @@ class Algorithms {
   filterProfiles(profiles, userProfile) { //filtering the profiles based on the user's preferences, such as age range, location, and hobbies.
     const matches = [];
 
+    console.log("In Filter Profiles");
+
     for (const profile of profiles) {
       const age = Number(profile.age);
       const ageMatches =
@@ -29,13 +31,18 @@ class Algorithms {
     return matches;
   }
 
-  calculateMatches(userProfile, profiles) { //calcylating the compatibility score for each profile based on the user's preferences and the profile's attributes. The compatibility score is calculated based on age, location, and hobbies.
+  calculateMatches(userProfile, profiles) { //calclating the compatibility score for each profile based on the user's preferences and the profile's attributes. The compatibility score is calculated based on age, location, and hobbies.
     const matches = [];
-
-    for (const profile of profiles) {
+    console.log("In Calculate Matches in Algoristhms.js");
+    console.log("User profile is:", userProfile.name);
+    console.log("How many profiles are there to check against?:", profiles.size);
+    let CurrentNode = profiles.first;
+    while(CurrentNode !== null) {
       let compatibility = 0;
-      const age = Number(profile.age);
-      const hobbies = [profile.hobby1, profile.hobby2, profile.hobby3];
+      console.log("Checking against profile:", CurrentNode.data.name);
+
+      const age = Number(CurrentNode.data.age);
+      const hobbies = [CurrentNode.data.hobby1, CurrentNode.data.hobby2, CurrentNode.data.hobby3];
 
       if (
         age >= userProfile.preferences.minAge &&
@@ -44,11 +51,11 @@ class Algorithms {
         compatibility += 30;
       }
 
-      if (profile.placeOfResidence === userProfile.preferences.preferredLocation) {
+      if (CurrentNode.data.placeOfResidence === userProfile.preferences.preferredLocation) {
         compatibility += 35;
       }
 
-      if (profile.placeOfResidence === userProfile.placeOfResidence) {
+      if (CurrentNode.data.placeOfResidence === userProfile.placeOfResidence) {
         compatibility += 10;
       }
 
@@ -66,9 +73,11 @@ class Algorithms {
       }
 
       matches.push({
-        ...profile,
+        ...CurrentNode.data,
         Compatibility: compatibility
       });
+
+      CurrentNode = CurrentNode.next;
     }
 
     return this.sortProfiles(matches);
