@@ -22,6 +22,7 @@ let backToMatchesButton = null;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   loadProfiles();
+  allProfiles = profileManager.getAllProfiles();
 }
 
 function draw() {
@@ -230,8 +231,8 @@ function checkLogin() {
 
 function loadProfiles() {
   loadStrings("profiles.txt", function(lines) { //line loads the profiles.txt file. When the file is ready, it gives each line of the file to the function as lines, so the program can use the profile information.
-    profileData = profileManager.loadProfilesFromText(lines);
-    allProfiles = profileManager.allProfiles;
+    profileManager.loadProfilesFromText(lines);
+    console.log("Number of profiles loaded:", profileManager.allProfiles.size);
   });
 }
 
@@ -239,7 +240,7 @@ function startMatchCalculation() {
   profileManager.saveCurrentUser(currentUserProfile);
   stage = 3;
   matchStatusMessage = "Calculating matches...";
-
+  console.log("Starting match calculation for user:", currentUserProfile.name);
   setTimeout(function() {
     calculateMatches();
     stage = 4;
@@ -248,7 +249,9 @@ function startMatchCalculation() {
 }
 
 function calculateMatches() {
-  matchedProfiles = algorithms.calculateMatches(currentUserProfile, profileData);
+  console.log("In Calcuate Matches");
+  console.log("Number of profiles is:", profileManager.allProfiles.size);
+  matchedProfiles = algorithms.calculateMatches(currentUserProfile, profileManager.allProfiles);
   currentMatchIndex = 0;
 }
 

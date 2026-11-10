@@ -11,14 +11,14 @@ class ProfileManager {
 
   loadProfilesFromText(lines) { //getting profile data from the txt file.
     this.allProfiles = new LinkedList();
-
+   
     for (let line of lines) {
       if (!line.trim()) continue;
-
+   
       let values = line.split(",");
       values = values.map((value) => {
         value = value.trim(); //trim removes whitespace from both ends of a string.
-
+     //console.log("Processing value:", value);
         if (value.startsWith('"')) {
           value = value.substring(1); //substring takes the text from the first character to the last character of the string.
         }
@@ -44,10 +44,10 @@ class ProfileManager {
         );
 
         this.allProfiles.add(profile);
+        console.log("Profile added:", profile.name);
+        console.log("Current number of profiles:", this.allProfiles.size);
       }
     }
-
-    return this.allProfiles.toArray();
   }
 
   addNewProfile(profileData) {
