@@ -230,15 +230,9 @@ function checkLogin() {
 }
 
 function loadProfiles() {
-<<<<<<< HEAD
-  loadStrings("Data/profiles.txt", function(lines) { //line loads the profiles.txt file. When the file is ready, it gives each line of the file to the function as lines, so the program can use the profile information.
-    profileData = profileManager.loadProfilesFromText(lines);
-    allProfiles = profileManager.allProfiles;
-=======
   loadStrings("profiles.txt", function(lines) { //line loads the profiles.txt file. When the file is ready, it gives each line of the file to the function as lines, so the program can use the profile information.
     profileManager.loadProfilesFromText(lines);
     console.log("Number of profiles loaded:", profileManager.allProfiles.size);
->>>>>>> 957ac5f897f064514844133877c703fcdfb01a24
   });
 }
 

@@ -11,7 +11,7 @@ class ProfileManager {
 
   loadProfilesFromText(lines) { //getting profile data from the txt file.
     this.allProfiles = new LinkedList();
-   
+    console.log("Loading profiles from text...");
     for (let line of lines) {
       if (!line.trim()) continue;
    
