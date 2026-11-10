@@ -229,7 +229,7 @@ function checkLogin() {
 }
 
 function loadProfiles() {
-  loadStrings("profiles.txt", function(lines) { //line loads the profiles.txt file. When the file is ready, it gives each line of the file to the function as lines, so the program can use the profile information.
+  loadStrings("Data/profiles.txt", function(lines) { //line loads the profiles.txt file. When the file is ready, it gives each line of the file to the function as lines, so the program can use the profile information.
     profileData = profileManager.loadProfilesFromText(lines);
     allProfiles = profileManager.allProfiles;
   });
