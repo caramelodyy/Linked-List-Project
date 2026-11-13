@@ -67,7 +67,7 @@ class Algorithms {
         }
       }
 
-      matches.push({
+      matches.push({ //adds the profile and its compatibility score to the matches array.
         ...CurrentNode.data,
         Compatibility: compatibility
       });
