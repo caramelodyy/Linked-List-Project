@@ -52,7 +52,7 @@ class Algorithms {
       }
 
       if (CurrentNode.data.placeOfResidence === userProfile.preferences.preferredLocation) {
-        compatibility += 35;
+        compatibility += 30;
       }
 
       if (CurrentNode.data.placeOfResidence === userProfile.placeOfResidence) {
@@ -60,16 +60,11 @@ class Algorithms {
       }
 
       if (hobbies.includes(userProfile.hobby)) {
-        compatibility += 25;
+        for(const hobby of hobbies) {
+          if(hobby === userProfile.hobby) {
+        compatibility += 10;
       }
-
-      const userHobby = userProfile.hobby.toLowerCase();
-      const hasSameHobby = hobbies.some((hobby) => {
-        return hobby.toLowerCase() === userHobby;
-      });
-
-      if (hasSameHobby) {
-        compatibility += 20;
+        }
       }
 
       matches.push({ //adds the profile and its compatibility score to the matches array.
