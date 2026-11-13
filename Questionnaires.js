@@ -92,40 +92,40 @@ class Questionnaires {
       this.age = Number(this.ageSelect.value()) || 0;
     });
 
-    this.hobbySelect = createSelect();
-    this.hobbySelect.position(480, 80);
-    this.hobbySelect.size(360, 40);
-    this.hobbySelect.style("font-size", "20px");
-    this.hobbySelect.option("Choose a hobby");
+    this.hobbySelect1 = createSelect();
+    this.hobbySelect1.position(480, 80);
+    this.hobbySelect1.size(360, 40);
+    this.hobbySelect1.style("font-size", "20px");
+    this.hobbySelect1.option("Choose a hobby");
     for (let hobby of this.hobbyOptions) {
-      this.hobbySelect.option(hobby);
+      this.hobbySelect1.option(hobby);
     }
-    this.hobbySelect.changed(() => {
-      this.hobby = this.hobbySelect.value();
+    this.hobbySelect1.changed(() => {
+      this.hobby = this.hobbySelect1.value();
     });
 
-        this.hobbySelect = createSelect();
-    this.hobbySelect.position(480, 180);
-    this.hobbySelect.size(360, 40);
-    this.hobbySelect.style("font-size", "20px");
-    this.hobbySelect.option("Choose a hobby");
+        this.hobbySelect2 = createSelect();
+    this.hobbySelect2.position(480, 180);
+    this.hobbySelect2.size(360, 40);
+    this.hobbySelect2.style("font-size", "20px");
+    this.hobbySelect2.option("Choose a hobby");
     for (let hobby of this.hobbyOptions) {
-      this.hobbySelect.option(hobby);
+      this.hobbySelect2.option(hobby);
     }
-    this.hobbySelect.changed(() => {
-      this.hobby = this.hobbySelect.value();
+    this.hobbySelect2.changed(() => {
+      this.hobby = this.hobbySelect2.value();
     });
 
-        this.hobbySelect = createSelect();
-    this.hobbySelect.position(480, 280);
-    this.hobbySelect.size(360, 40);
-    this.hobbySelect.style("font-size", "20px");
-    this.hobbySelect.option("Choose a hobby");
+        this.hobbySelect3 = createSelect();
+    this.hobbySelect3.position(480, 280);
+    this.hobbySelect3.size(360, 40);
+    this.hobbySelect3.style("font-size", "20px");
+    this.hobbySelect3.option("Choose a hobby");
     for (let hobby of this.hobbyOptions) {
-      this.hobbySelect.option(hobby);
+      this.hobbySelect3.option(hobby);
     }
-    this.hobbySelect.changed(() => {
-      this.hobby = this.hobbySelect.value();
+    this.hobbySelect3.changed(() => {
+      this.hobby = this.hobbySelect3.value();
     });
 
     this.locationSelect = createSelect();
@@ -189,7 +189,9 @@ class Questionnaires {
     const elements = [
       this.nameInput,
       this.ageSelect,
-      this.hobbySelect,
+      this.hobbySelect1,
+      this.hobbySelect2,
+      this.hobbySelect3,
       this.locationSelect,
       this.minAgeSelect,
       this.maxAgeSelect,
@@ -237,9 +239,13 @@ class Questionnaires {
       this.name = answer;
     } else if (question === "age") {
       this.age = Number(answer) || 0;
-    } else if (question === "hobby") {
+    } else if (question === "hobby1") {
+      this.hobby1 = answer;
+    }else if (question === "hobby2") {
       this.hobby = answer;
-    } else if (question === "placeOfResidence") {
+      }else if ( question === "hobby3") {
+      this.hobby3 = answer;
+    }else if (question === "placeOfResidence") {
       this.placeOfResidence = answer;
     } else if (question === "preferredLocation") {
       this.preferredLocation = answer;
@@ -253,6 +259,8 @@ class Questionnaires {
       this.name === "" ||
       this.age <= 0 ||
       this.hobby === "" ||
+      this.hobby2 === ""||
+      this.hobby3 === ""||
       this.placeOfResidence === "" ||
       this.minAge <= 0 ||
       this.maxAge < this.minAge ||
@@ -274,7 +282,9 @@ class Questionnaires {
     currentUserProfile = {
       name: this.name,
       age: this.age,
-      hobby: this.hobby,
+      hobby1: this.hobby1,
+      hobby2: this.hobby2,
+      hobby3: this.hobby3,
       placeOfResidence: this.placeOfResidence,
       preferences: {
         minAge: this.minAge,

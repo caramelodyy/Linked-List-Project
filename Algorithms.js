@@ -21,7 +21,7 @@ class Algorithms {
         profile.placeOfResidence === userProfile.preferences.preferredLocation;
 
       const hobbies = [profile.hobby1, profile.hobby2, profile.hobby3];
-      const hobbyMatches = hobbies.includes(userProfile.hobby);
+      const hobbyMatches = [userProfile.hobby1, userProfile.hobby2, userProfile.hobby3];
 
       if (ageMatches && locationMatches && hobbyMatches) {
         matches.push(profile);
