@@ -76,7 +76,9 @@ class ProfileManager {
     if (!profile) return false;
     if (!profile.name || profile.name === "") return false;
     if (!profile.age || profile.age <= 0) return false;
-    if (!profile.hobby || profile.hobby === "") return false;
+    if (!profile.hobby1 || profile.hobby1 === "") return false;
+    if (!profile.hobby2 || profile.hobby2 === "") return false;
+    if (!profile.hobby3 || profile.hobby3 === "") return false;
     if (!profile.placeOfResidence || profile.placeOfResidence === "") return false;
     if (!profile.preferences) return false;
     if (!profile.preferences.preferredLocation || profile.preferences.preferredLocation === "") return false;

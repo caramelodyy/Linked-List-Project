@@ -21,9 +21,17 @@ class Algorithms {
         profile.placeOfResidence === userProfile.preferences.preferredLocation;
 
       const hobbies = [profile.hobby1, profile.hobby2, profile.hobby3];
-      const hobbyMatches = [userProfile.hobby1, userProfile.hobby2, userProfile.hobby3];
+      const userMatches = [userProfile.hobby1, userProfile.hobby2, userProfile.hobby3];
+      
+console.log("Profile hobbies:", hobbies);
+console.log("User hobbies:", userHobbies);
 
-      if (ageMatches && locationMatches && hobbyMatches) {
+
+      const hobbyMatches = hobbies.some(hobby => userMatches.includes(hobby));
+
+console.log("Matching hobbies:", matchingHobbies);
+
+      if (ageMatches && locationMatches && userMatches) {
         matches.push(profile);
       }
     }
@@ -43,6 +51,7 @@ class Algorithms {
 
       const age = Number(CurrentNode.data.age);
       const hobbies = [CurrentNode.data.hobby1, CurrentNode.data.hobby2, CurrentNode.data.hobby3];
+      const userHobbies = [userProfile.hobby1, userProfile.hobby2, userProfile.hobby3];
 
       if (
         age >= userProfile.preferences.minAge &&
@@ -59,15 +68,10 @@ class Algorithms {
         compatibility += 10;
       }
 
-      if (hobbies.includes(userProfile.hobby)) {
-        for(const hobby of hobbies) {
-          if(hobby === userProfile.hobby) {
-        compatibility += 10;
-      }
-        }
-      }
+      const matchingHobbies = hobbies.filter(hobby => userHobbies.includes(hobby));
+      compatibility += matchingHobbies.length * 10;
 
-      matches.push({ //adds the profile and its compatibility score to the matches array.
+      matches.push({
         ...CurrentNode.data,
         Compatibility: compatibility
       });
