@@ -12,12 +12,12 @@ class ProfileManager {
   loadProfilesFromText(lines) { //getting profile data from the txt file.
     this.allProfiles = new LinkedList();
     console.log("Loading profiles from text...");
-    for (let line of lines) {
+    for (let line of lines) { //js version of a for loop
       if (!line.trim()) continue;
    
       let values = line.split(",");
       values = values.map((value) => {
-        value = value.trim(); //trim removes whitespace from both ends of a string.
+        value = value.trim(); //trim removes whitespace from both ends of a string. Because we had to put the names and hobbies etc in strings. This allows to read the txt file without quotations and spaces, just the information.
      //console.log("Processing value:", value);
         if (value.startsWith('"')) {
           value = value.substring(1); //substring takes the text from the first character to the last character of the string.

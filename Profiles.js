@@ -24,30 +24,5 @@ class Profile {
     this.Compatibility = 0;
     this.nexr = null;
   }
-  display(
-    y 
-  ) {
-    textSize(20);
-    text(
-      this.iD +
-        "," +
-        this.passWord +
-        "," +
-        this.name +
-        "," +
-        this.age +
-        "," +
-        this.hobby1 +
-        "," +
-        this.hobby2 +
-        "," +
-        this.hobby3 +
-        "," +
-        this.placeOfResidence +
-        "," +
-        this.likes,
-      10, 
-      y
-    );
-  }
+  
 }
