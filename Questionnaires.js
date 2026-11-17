@@ -101,7 +101,7 @@ class Questionnaires {
       this.hobbySelect1.option(hobby);
     }
     this.hobbySelect1.changed(() => {
-      this.hobby = this.hobbySelect1.value();
+      this.hobby1 = this.hobbySelect1.value();
     });
 
         this.hobbySelect2 = createSelect();
@@ -113,7 +113,7 @@ class Questionnaires {
       this.hobbySelect2.option(hobby);
     }
     this.hobbySelect2.changed(() => {
-      this.hobby = this.hobbySelect2.value();
+      this.hobby2 = this.hobbySelect2.value();
     });
 
         this.hobbySelect3 = createSelect();
@@ -125,7 +125,7 @@ class Questionnaires {
       this.hobbySelect3.option(hobby);
     }
     this.hobbySelect3.changed(() => {
-      this.hobby = this.hobbySelect3.value();
+      this.hobby3 = this.hobbySelect3.value();
     });
 
     this.locationSelect = createSelect();
@@ -242,7 +242,7 @@ class Questionnaires {
     } else if (question === "hobby1") {
       this.hobby1 = answer;
     }else if (question === "hobby2") {
-      this.hobby = answer;
+      this.hobby2 = answer;
       }else if ( question === "hobby3") {
       this.hobby3 = answer;
     }else if (question === "placeOfResidence") {
@@ -258,7 +258,7 @@ class Questionnaires {
     if (
       this.name === "" ||
       this.age <= 0 ||
-      this.hobby === "" ||
+      this.hobby1 === "" ||
       this.hobby2 === ""||
       this.hobby3 === ""||
       this.placeOfResidence === "" ||

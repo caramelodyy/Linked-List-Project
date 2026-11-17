@@ -21,7 +21,7 @@ class Algorithms {
         profile.placeOfResidence === userProfile.preferences.preferredLocation;
 
       const hobbies = [profile.hobby1, profile.hobby2, profile.hobby3];
-      const userMatches = [userProfile.hobby1, userProfile.hobby2, userProfile.hobby3];
+      const userMatches = [userProfile, userProfile.hobby2, userProfile.hobby3];
       
 console.log("Profile hobbies:", hobbies);
 console.log("User hobbies:", userHobbies);
@@ -53,6 +53,8 @@ console.log("Matching hobbies:", matchingHobbies);
       const hobbies = [CurrentNode.data.hobby1, CurrentNode.data.hobby2, CurrentNode.data.hobby3];
       const userHobbies = [userProfile.hobby1, userProfile.hobby2, userProfile.hobby3];
 
+     console.log("User hobbies:", userHobbies);
+
       if (
         age >= userProfile.preferences.minAge &&
         age <= userProfile.preferences.maxAge
@@ -68,8 +70,15 @@ console.log("Matching hobbies:", matchingHobbies);
         compatibility += 10;
       }
 
-      const matchingHobbies = hobbies.filter(hobby => userHobbies.includes(hobby));
-      compatibility += matchingHobbies.length * 10;
+      for (const hobby of hobbies) {
+        console.log("Checking hobby:", hobby);
+        for (const userHobby of userHobbies) { 
+          console.log("Checking user hobby:", userHobby);
+          if (hobby === userHobby) {
+            compatibility += 10;
+          }
+        }
+      }
 
       matches.push({
         ...CurrentNode.data,
